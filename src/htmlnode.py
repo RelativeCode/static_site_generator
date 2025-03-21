@@ -26,9 +26,14 @@ class HTMLNode():
         return f"HTMLNode(tag={self.tag}, value={self.value}, children={self.children}, props={self.props})"
 
 
+# htmlnode.py
+
 class LeafNode(HTMLNode):
-    def __init__(self, tag, value, props=None):
+    def __init__(self, tag: str, value: str, props: dict = None):
+        if not value:
+            raise ValueError("LeafNode must have a value. Empty value detected.")
         super().__init__(tag, value, None, props)
+
     
 
     def to_html(self):

@@ -53,6 +53,7 @@ class TestHTMLNode(unittest.TestCase):
         )
     
 
+
     def test_text(self):
         node = TextNode("This is a text node", TextType.NORMAL)
         html_node = text_node_to_html_node(node)
