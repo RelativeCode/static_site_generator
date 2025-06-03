@@ -16,7 +16,5 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Output folder (generated HTML site)
-public/
 
 
