@@ -71,6 +71,22 @@ def generate_page(from_path, template_path, dest_path):
     print(f"Page generated at {dest_path}")
 
 
+def generate_pages_recursive(content_dir, template_path, dest_dir):
+    for root, dirs, files in os.walk(content_dir):
+        for file in files:
+            if file.endswith(".md"):
+                from_path = os.path.join(root, file)
+
+                # Determine destination path
+                rel_path = os.path.relpath(from_path, content_dir)
+                new_file_name = os.path.splitext(rel_path)[0] + ".html"
+                dest_path = os.path.join(dest_dir, new_file_name)
+
+                print(f"Generating page for: {from_path} -> {dest_path}")
+                generate_page(from_path, template_path, dest_path)
+
+
+
 def main():
     # Testing the TextNode class
     random_node = TextNode("Some random text", TextType.LINK, "www.random.com")
@@ -80,7 +96,7 @@ def main():
     copy_directory("static", "public")
 
     # Generate the webpage
-    generate_page("content/index.md", "template.html", "public/index.html")
+    generate_pages_recursive("content", "template.html", "public")
 
 
 if __name__ == "__main__":
